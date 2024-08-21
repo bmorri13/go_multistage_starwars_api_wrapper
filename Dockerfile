@@ -1,5 +1,5 @@
 # Start with a golang base image to build our application
-FROM golang:1.22.1-alpine3.19 as build-env
+FROM cgr.dev/chainguard/go:latest as build-env
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -17,9 +17,8 @@ COPY . .
 # Build the Go app
 RUN CGO_ENABLED=0 go build -o /go-server
 
-# Start a new stage from scratch
-# Using a distroless image for a minimal and secure final image
-FROM gcr.io/distroless/base-debian12
+# Start a new static cgr image to reduce the size of the final image
+FROM cgr.dev/chainguard/static:latest
 
 # Copy the Pre-built binary file from the previous stage
 COPY --from=build-env /go-server /
