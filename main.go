@@ -9,7 +9,7 @@ import (
 )
 
 func getSwapiURL(endpoint, searchTerm string) ([]byte, int) {
-    swapiURL := fmt.Sprintf("https://swapi.dev/api/%s/", endpoint)
+    swapiURL := fmt.Sprintf("https://swapi.py4e.com/api/%s/", endpoint)
     if searchTerm != "" {
         swapiURL += fmt.Sprintf("?search=%s", searchTerm)
     }
